@@ -33,3 +33,6 @@ class Pokemon(models.Model):
   move_3 = models.CharField(max_length=20) # TODO: find actual max length
   move_4 = models.CharField(max_length=20) # TODO: find actual max length
   run_instance = models.ForeignKey(Run, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.species
