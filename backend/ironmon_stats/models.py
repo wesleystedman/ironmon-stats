@@ -19,19 +19,19 @@ class Run(models.Model):
 
 class Pokemon(models.Model):
   species = models.CharField(max_length=23) # pokeapi species name
-  level = models.PositiveSmallIntegerField()
-  hp = models.PositiveSmallIntegerField()
-  attack = models.PositiveSmallIntegerField()
-  defense = models.PositiveSmallIntegerField()
-  sp_attack = models.PositiveSmallIntegerField()
-  sp_defense = models.PositiveSmallIntegerField()
-  speed = models.PositiveSmallIntegerField()
-  ability = models.CharField(max_length=30) # TODO: find actual max length
-  nature = models.CharField(max_length=7)
-  move_1 = models.CharField(max_length=20) # TODO: find actual max length
-  move_2 = models.CharField(max_length=20) # TODO: find actual max length
-  move_3 = models.CharField(max_length=20) # TODO: find actual max length
-  move_4 = models.CharField(max_length=20) # TODO: find actual max length
+  level = models.PositiveSmallIntegerField(blank=True)
+  hp = models.PositiveSmallIntegerField(blank=True)
+  attack = models.PositiveSmallIntegerField(blank=True)
+  defense = models.PositiveSmallIntegerField(blank=True)
+  sp_attack = models.PositiveSmallIntegerField(blank=True)
+  sp_defense = models.PositiveSmallIntegerField(blank=True)
+  speed = models.PositiveSmallIntegerField(blank=True)
+  ability = models.CharField(max_length=30, blank=True) # TODO: find actual max length
+  nature = models.CharField(max_length=7, blank=True)
+  move_1 = models.CharField(max_length=20, blank=True) # TODO: find actual max length
+  move_2 = models.CharField(max_length=20, blank=True) # TODO: find actual max length
+  move_3 = models.CharField(max_length=20, blank=True) # TODO: find actual max length
+  move_4 = models.CharField(max_length=20, blank=True) # TODO: find actual max length
   run_instance = models.ForeignKey(Run, on_delete=models.CASCADE)
 
   def __str__(self):
