@@ -10,7 +10,7 @@ class Run(models.Model):
   run_seed = models.CharField(max_length=100, blank=True) # TODO: check actual max size
   randomizer_version = models.CharField(max_length=20, blank=True)
   notes = models.TextField(max_length=2000, blank=True)
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  user = models.ForeignKey(User, related_name='runs', on_delete=models.CASCADE)
 
   def __str__(self):
     return f'{self.user.username} {self.game} run {self.attempt}'
