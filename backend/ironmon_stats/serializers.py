@@ -9,8 +9,8 @@ class PokemonSerializer(serializers.ModelSerializer):
 
 
 class RunSerializer(serializers.ModelSerializer):
-  pokemon = PokemonSerializer(required=False, many=True)
+  pokemons = serializers.PrimaryKeyRelatedField(many=True, queryset=Pokemon.objects.all())
 
   class Meta:
     model = Run
-    fields = '__all__'
+    fields = ['pk', 'game', 'attempt', 'endpoint', 'settings_string', 'run_seed', 'randomizer_version', 'notes', 'user', 'pokemons']
