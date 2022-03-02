@@ -11,6 +11,7 @@ class PokemonSerializer(serializers.ModelSerializer):
 
 class RunSerializer(serializers.ModelSerializer):
   pokemons = serializers.PrimaryKeyRelatedField(many=True, queryset=Pokemon.objects.all())
+  user = serializers.ReadOnlyField(source='user.username')
 
   class Meta:
     model = Run
