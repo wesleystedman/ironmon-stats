@@ -10,12 +10,12 @@ class PokemonSerializer(serializers.ModelSerializer):
 
 
 class RunSerializer(serializers.ModelSerializer):
-  pokemons = serializers.PrimaryKeyRelatedField(many=True, queryset=Pokemon.objects.all())
+  pokemon = serializers.PrimaryKeyRelatedField(many=True, queryset=Pokemon.objects.all())
   user = serializers.ReadOnlyField(source='user.username')
 
   class Meta:
     model = Run
-    fields = ['pk', 'game', 'attempt', 'endpoint', 'settings_string', 'run_seed', 'randomizer_version', 'notes', 'user', 'pokemons']
+    fields = ['pk', 'game', 'attempt', 'endpoint', 'settings_string', 'run_seed', 'randomizer_version', 'notes', 'user', 'pokemon']
 
 
 class UserSerializer(serializers.ModelSerializer):
