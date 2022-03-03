@@ -3,43 +3,31 @@ from rest_framework import permissions
 from .models import Run, Pokemon
 from django.contrib.auth.models import User
 from .serializers import RunSerializer, PokemonSerializer, UserSerializer
-
-class IsRunOwnerOrReadOnly(permissions.BasePermission):
-  def has_object_permission(self, request, view, obj):
-    if request.method in permissions.SAFE_METHODS:
-      return True
-    return obj.user == request.user
-
-
-class IsPokemonOwnerOrReadOnly(permissions.BasePermission):
-  def has_object_permission(self, request, view, obj):
-    if request.method in permissions.SAFE_METHODS:
-      return True
-    return obj.run_instance.user == request.user
+from .permissions import IsRunOwnerOrReadOnly, IsPokemonOwnerOrReadOnly
 
 
 class RunList(generics.ListCreateAPIView):
   queryset =  Run.objects.all()
   serializer_class = RunSerializer
-  permission_classes = [IsRunOwnerOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsRunOwnerOrReadOnly]
 
 
 class RunDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Run.objects.all()
   serializer_class = RunSerializer
-  permission_classes = [IsRunOwnerOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsRunOwnerOrReadOnly]
 
 
 class PokemonList(generics.ListCreateAPIView):
   queryset =  Pokemon.objects.all()
   serializer_class = PokemonSerializer
-  permission_classes = [IsPokemonOwnerOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsPokemonOwnerOrReadOnly]
 
 
 class PokemonDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Pokemon.objects.all()
   serializer_class = PokemonSerializer
-  permission_classes = [IsPokemonOwnerOrReadOnly]
+  permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsPokemonOwnerOrReadOnly]
 
 
 class UserList(generics.ListAPIView):
