@@ -10,6 +10,9 @@ class RunViewSet(viewsets.ModelViewSet):
   serializer_class = RunSerializer
   permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsRunOwnerOrReadOnly]
 
+  def perform_create(self, serializer):
+    serializer.save(user=self.request.user)
+
 
 class PokemonViewSet(viewsets.ModelViewSet):
   queryset =  Pokemon.objects.all()
