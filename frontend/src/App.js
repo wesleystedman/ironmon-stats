@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [runs, setRuns] = useState([]);
+
+  // get runs on load
+  useEffect(() => {
+    axios.get('/api/runs')
+      .then(res => setRuns(res.data.results))
+      .catch(err => console.log(err))
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {runs.map((run, index) => (
+        <div key={index}>{run.user} {run.game} run {run.attempt}</div>
+      ))}
     </div>
   );
 }
